@@ -13,11 +13,11 @@ using std::endl;
 class BigInt {
 
 private:
-	//uint *digits = nullptr;
 	list<uint> digits;
+
 public:
 
-
+	/* overload ctor. */
 	BigInt(char value[]) {
 		// will call assignment operator
 		*this = value;
@@ -35,10 +35,7 @@ public:
 		digits = other.digits;
 		return *this;
 	}
-
-	~BigInt() {
-
-	}
+	
 
 	/* assignment */
 	BigInt& operator=(char rhs[]) {
@@ -94,7 +91,8 @@ public:
 
 void main() {
 
-	BigInt a = "999";
+	// overload ctor.
+	BigInt a = "123";
 
 	cout << a++ << endl;
 	cout << ++a << endl;
