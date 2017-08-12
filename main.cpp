@@ -16,7 +16,7 @@ typedef short unsigned int uint;
 class bigint {
 
 private:
-    bool sign = false;
+    bool negative = false;
 	list<uint> digits;
 
 public:
@@ -49,7 +49,7 @@ public:
         unsigned int i = 0;
         if(rhs[0] == '-')
         {   
-            sign = true;
+            negative = true;
             ++i;
         }
 		for (; i < strlen(rhs); i++) {
@@ -67,7 +67,20 @@ public:
 	}
 
     int compare(const bigint& other){
-        if(other.sign && !this->sign) return 1;
+        
+        if(other.negative && !negative) return 1;
+        if(!other.negative && negative) return -1;
+        if(other.digits.size() < digits.size()) return 1;
+        if(other.digits.size() > digits.size()) return -1;
+        list<uint>::const_reverse_iterator it1 = digits.rbegin();
+        list<uint>::const_reverse_iterator it2 = other.digits.rbegin();
+        while(it1 != digits.rend()){
+            if(*it1 > *it2 ) return 1;
+            if(*it1 < *it2) return -1;
+            ++it1;
+            ++it2;
+        }
+        return 0;
     }
 
 	/* prefix increment */
@@ -151,7 +164,7 @@ public:
     
 
 	friend ostream& operator<<(ostream& os, const bigint& obj) {
-        if(obj.sign) os << '-';
+        if(obj.negative) os << '-';
 		for (list<uint>::const_reverse_iterator i = obj.digits.rbegin(); i != obj.digits.rend(); ++i)
 			os << *i;
 
@@ -159,14 +172,20 @@ public:
 	}
 };
 
+template <class type>
+void assert(type a, type b) {
+    if(a != b) cout << "failed" << endl;
+    else cout << "passed" << endl;
+}
 
 int main() {
 
 	// overload ctor.
 	bigint a = "-000123000";
     bigint b = "9";
-
-	cout << a << endl;    
+    assert(a.compare(b), -1);
+    assert(b.compare(a), 1);
+	
 
 	cin.get();
     return 0;
