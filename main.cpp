@@ -10,7 +10,7 @@ using std::ostream;
 using std::endl;
 
 
-class BigInt {
+class bigint {
 
 private:
 	list<uint> digits;
@@ -18,27 +18,27 @@ private:
 public:
 
 	/* overload ctor. */
-	BigInt(char value[]) {
+	bigint(char value[]) {
 		// will call assignment operator
 		*this = value;
 	}
 
 	/* copy constructor */
-	BigInt(const BigInt& obj) {
+	bigint(const bigint& obj) {
 
 		// will call copy assignment constructor.
 		*this = obj;
 	}
 
 	/* copy assignment */
-	BigInt& operator=(const BigInt& other) {
+	bigint& operator=(const bigint& other) {
 		digits = other.digits;
 		return *this;
 	}
 	
 
 	/* assignment */
-	BigInt& operator=(char rhs[]) {
+	bigint& operator=(char rhs[]) {
 		digits.clear();
 		for (int i = 0; i < strlen(rhs); i++)
 			digits.push_front(rhs[i] - '0');
@@ -47,7 +47,7 @@ public:
 	}
 
 	/* prefix increment */
-	BigInt& operator++() {
+	bigint& operator++() {
 		int carry = 0;
 		for (auto digit = digits.begin(); digit != digits.end(); ++digit) {
 
@@ -66,10 +66,10 @@ public:
 	}
 
 	/* postfix increament */
-	BigInt operator++(int) {
+	bigint operator++(int) {
 
 		// save the original value.
-		BigInt temp = *this;
+		bigint temp = *this;
 
 		// increment this object.
 		++*this;
@@ -80,7 +80,7 @@ public:
 
 
 
-	friend ostream& operator<<(ostream& os, const BigInt& obj) {
+	friend ostream& operator<<(ostream& os, const bigint& obj) {
 		for (auto i = obj.digits.rbegin(); i != obj.digits.rend(); ++i)
 			os << *i;
 
@@ -92,7 +92,7 @@ public:
 void main() {
 
 	// overload ctor.
-	BigInt a = "123";
+	bigint a = "123";
 
 	cout << a++ << endl;
 	cout << ++a << endl;
