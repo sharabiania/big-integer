@@ -1,72 +1,71 @@
 #include <iostream>
+#include <list>
 
 typedef unsigned int uint;
 
-using namespace std;
+using std::cout;
+using std::cin;
+using std::list;
+using std::ostream;
+using std::endl;
+
 
 class BigInt {
 
 private:
-	uint *digits = nullptr;
-	uint size;
+	//uint *digits = nullptr;
+	list<uint> digits;
 public:
-	BigInt(uint size) {
-		digits = new uint[size];
-		this->size = size;
-		for (int i = 0; i < size; i++) 
-			digits[i] = 0;
-	}
-	
+
+
 	BigInt(char value[]) {
+		// will call assignment operator
 		*this = value;
 	}
 
 	/* copy constructor */
 	BigInt(const BigInt& obj) {
-		
+
+		// will call copy assignment constructor.
 		*this = obj;
 	}
 
 	/* copy assignment */
-	BigInt& operator=(const BigInt& other) {		
-		size = other.size;
-		digits = new uint[size];
-		for (int i = 0; i < size; i++)
-			digits[i] = other.digits[i];
-
+	BigInt& operator=(const BigInt& other) {
+		digits = other.digits;
 		return *this;
 	}
 
 	~BigInt() {
-		delete[] digits;
-		digits = nullptr;
-		size = 0;
+
 	}
 
 	/* assignment */
 	BigInt& operator=(char rhs[]) {
-		delete[] digits;
-		digits = nullptr;
-		size = strlen(rhs);
-		digits = new uint[size];
-		for (int i = 0; i < size; i++) {
-			digits[i] = rhs[i] - '0';
-		}
+		digits.clear();
+		for (int i = 0; i < strlen(rhs); i++)
+			digits.push_front(rhs[i] - '0');
+
 		return *this;
-	}	
+	}
 
 	/* prefix increment */
 	BigInt& operator++() {
+		int carry = 0;
+		for (auto digit = digits.begin(); digit != digits.end(); ++digit) {
 
-		for (int i = size - 1; i >= 0; i--) {
-			if (digits[i] == 9) {
-				digits[i] = 0;
+			if (++*digit == 10) {
+				*digit = 0;
+				carry = 1;
 			}
 			else {
-				digits[i]++;
-				return *this;
+				*digit += carry;	
+				break;
 			}
 		}
+		if (carry == 1)
+			digits.push_back(1);
+		return *this;
 	}
 
 	/* postfix increament */
@@ -82,11 +81,12 @@ public:
 		return temp;
 	}
 
-	friend ostream& operator<<(ostream& os, const BigInt& bigInt) {
-		for(int i = 0; i < bigInt.size; i++)
-		{
-			os << bigInt.digits[i];
-		}
+
+
+	friend ostream& operator<<(ostream& os, const BigInt& obj) {
+		for (auto i = obj.digits.rbegin(); i != obj.digits.rend(); ++i)
+			os << *i;
+
 		return os;
 	}
 };
@@ -94,11 +94,10 @@ public:
 
 void main() {
 
-	BigInt a = "199";	
+	BigInt a = "999";
+
 	cout << a++ << endl;
 	cout << ++a << endl;
-	
-	
 
 	cin.get();
 }
