@@ -1,7 +1,9 @@
 #include <iostream>
 #include <list>
+#include <cstring>
+#include <stdint.h>
 
-typedef unsigned int uint;
+
 
 using std::cout;
 using std::cin;
@@ -9,6 +11,7 @@ using std::list;
 using std::ostream;
 using std::endl;
 
+typedef short unsigned int uint;
 
 class bigint {
 
@@ -18,7 +21,7 @@ private:
 public:
 
 	/* overload ctor. */
-	bigint(char value[]) {
+	bigint(const char value[]) {
 		// will call assignment operator
 		*this = value;
 	}
@@ -38,9 +41,9 @@ public:
 	
 
 	/* assignment */
-	bigint& operator=(char rhs[]) {
+	bigint& operator=(const char rhs[]) {
 		digits.clear();
-		for (int i = 0; i < strlen(rhs); i++)
+		for (unsigned int i = 0; i < strlen(rhs); i++)
 			digits.push_front(rhs[i] - '0');
 
 		return *this;
@@ -49,7 +52,7 @@ public:
 	/* prefix increment */
 	bigint& operator++() {
 		int carry = 0;
-		for (auto digit = digits.begin(); digit != digits.end(); ++digit) {
+		for (list<uint>::iterator digit = digits.begin(); digit != digits.end(); ++digit) {
 
 			if (++*digit == 10) {
 				*digit = 0;
@@ -81,7 +84,7 @@ public:
 
 
 	friend ostream& operator<<(ostream& os, const bigint& obj) {
-		for (auto i = obj.digits.rbegin(); i != obj.digits.rend(); ++i)
+		for (list<uint>::const_reverse_iterator i = obj.digits.rbegin(); i != obj.digits.rend(); ++i)
 			os << *i;
 
 		return os;
@@ -89,13 +92,15 @@ public:
 };
 
 
-void main() {
+int main() {
 
 	// overload ctor.
 	bigint a = "123";
 
 	cout << a++ << endl;
 	cout << ++a << endl;
+    
 
 	cin.get();
+    return 0;
 }
