@@ -16,13 +16,12 @@ typedef short unsigned int uint;
 class bigint {
 
 private:
+    bool sign = false;
 	list<uint> digits;
 
 public:
     /* default ctor */
-    bigint() {
-        
-    }
+    bigint() {}
 
 	/* overload ctor */
 	bigint(const char value[]) {
@@ -43,15 +42,33 @@ public:
 		return *this;
 	}
 	
-
 	/* assignment */
 	bigint& operator=(const char rhs[]) {
 		digits.clear();
-		for (unsigned int i = 0; i < strlen(rhs); i++)
-			digits.push_front(rhs[i] - '0');
+        bool skip = true; // skip consecutive preceding zeros.
+        unsigned int i = 0;
+        if(rhs[0] == '-')
+        {   
+            sign = true;
+            ++i;
+        }
+		for (; i < strlen(rhs); i++) {
+            if(skip) {
+                if(rhs[i] != '0') {
+                    digits.push_front(rhs[i] - '0');
+                    skip = false;
+                }
+            }            
+            else
+                digits.push_front(rhs[i] - '0');
+        }        
 
 		return *this;
 	}
+
+    int compare(const bigint& other){
+        if(other.sign && !this->sign) return 1;
+    }
 
 	/* prefix increment */
 	bigint& operator++() {
@@ -85,6 +102,7 @@ public:
 		return temp;
 	}
 
+   
     /* add two bigints */
     bigint operator+(const bigint& rhs){
         
@@ -113,8 +131,27 @@ public:
         return temp;
     }
 
+    /* TODO: subtract two bigints */
+    bigint operator-(const bigint& rhs){
+        list<uint>::const_iterator it1 = digits.begin();
+        list<uint>::const_iterator it2 = rhs.digits.begin();
+        
+        bigint temp;
+        while(it1 != digits.end()|| it2 != rhs.digits.end()){
+            uint a = 0, b = 0, carry = 0;
+            if(it1 != digits.end()) a = *(it1++);
+            if(it2 != rhs.digits.end()) b = *(it2++);
+            if(a < b) carry = 10;
+            if(carry != 0) --a;
+            int sub = carry + a - b;
+            temp.digits.push_back(sub);
+        }
+        return temp;
+    }
+    
 
 	friend ostream& operator<<(ostream& os, const bigint& obj) {
+        if(obj.sign) os << '-';
 		for (list<uint>::const_reverse_iterator i = obj.digits.rbegin(); i != obj.digits.rend(); ++i)
 			os << *i;
 
@@ -126,11 +163,10 @@ public:
 int main() {
 
 	// overload ctor.
-	bigint a = "199";
-    bigint b = "11";
-    bigint c = "9";
+	bigint a = "-000123000";
+    bigint b = "9";
 
-	cout << a + b + c<< endl;    
+	cout << a << endl;    
 
 	cin.get();
     return 0;
