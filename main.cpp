@@ -7,7 +7,7 @@ using namespace std;
 class BigInt {
 
 private:
-	uint *digits;
+	uint *digits = nullptr;
 	uint size;
 public:
 	BigInt(uint size) {
@@ -21,9 +21,14 @@ public:
 		*this = value;
 	}
 
-	BigInt& operator=(const BigInt& other) {
+	/* copy constructor */
+	BigInt(const BigInt& obj) {
+		
+		*this = obj;
+	}
 
-		delete[] digits;
+	/* copy assignment */
+	BigInt& operator=(const BigInt& other) {		
 		size = other.size;
 		digits = new uint[size];
 		for (int i = 0; i < size; i++)
@@ -38,6 +43,7 @@ public:
 		size = 0;
 	}
 
+	/* assignment */
 	BigInt& operator=(char rhs[]) {
 		delete[] digits;
 		digits = nullptr;
@@ -48,6 +54,33 @@ public:
 		}
 		return *this;
 	}	
+
+	/* prefix increment */
+	BigInt& operator++() {
+
+		for (int i = size - 1; i >= 0; i--) {
+			if (digits[i] == 9) {
+				digits[i] = 0;
+			}
+			else {
+				digits[i]++;
+				return *this;
+			}
+		}
+	}
+
+	/* postfix increament */
+	BigInt operator++(int) {
+
+		// save the original value.
+		BigInt temp = *this;
+
+		// increment this object.
+		++*this;
+
+		// return old original value.
+		return temp;
+	}
 
 	friend ostream& operator<<(ostream& os, const BigInt& bigInt) {
 		for(int i = 0; i < bigInt.size; i++)
@@ -61,7 +94,11 @@ public:
 
 void main() {
 
-	BigInt a = "123";	
-	cout << a;
+	BigInt a = "199";	
+	cout << a++ << endl;
+	cout << ++a << endl;
+	
+	
+
 	cin.get();
 }
