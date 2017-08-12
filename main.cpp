@@ -19,8 +19,12 @@ private:
 	list<uint> digits;
 
 public:
+    /* default ctor */
+    bigint() {
+        
+    }
 
-	/* overload ctor. */
+	/* overload ctor */
 	bigint(const char value[]) {
 		// will call assignment operator
 		*this = value;
@@ -81,6 +85,33 @@ public:
 		return temp;
 	}
 
+    /* add two bigints */
+    bigint operator+(const bigint& rhs){
+        
+        list<uint>::const_iterator it1 = digits.begin();
+        list<uint>::const_iterator it2 = rhs.digits.begin();
+        bigint temp;
+        uint carry = 0;
+        
+        while(it1 != digits.end() || it2 != rhs.digits.end()){
+            uint a = 0, b = 0;
+            if(it1 != digits.end()) a = *(it1++);
+            if(it2 != rhs.digits.end()) b = *(it2++);
+            uint sum = a + b + carry;
+            carry = 0;
+            if(sum >= 10) {
+                sum %= 10;
+                carry = 1;
+            }
+            
+            temp.digits.push_back(sum);
+          
+        }
+        if(carry == 1)
+            temp.digits.push_back(1);
+    
+        return temp;
+    }
 
 
 	friend ostream& operator<<(ostream& os, const bigint& obj) {
@@ -95,11 +126,11 @@ public:
 int main() {
 
 	// overload ctor.
-	bigint a = "123";
+	bigint a = "199";
+    bigint b = "11";
+    bigint c = "9";
 
-	cout << a++ << endl;
-	cout << ++a << endl;
-    
+	cout << a + b + c<< endl;    
 
 	cin.get();
     return 0;
