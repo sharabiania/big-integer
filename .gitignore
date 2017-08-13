@@ -4,6 +4,8 @@
 *.mk
 *.workspace
 *.project
+BigInteger.txt
+compilation.db
 Makefile
 
 # Prerequisites
