@@ -1,6 +1,6 @@
 #codelite files and folders
-Debug/
-.codelite/
+[Dd]ebug/*
+.codelite/*
 *.mk
 *.workspace
 *.project
