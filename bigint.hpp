@@ -114,12 +114,13 @@ public:
         if(!negative) {
             int carry = 0;
             for(auto it = digits.begin(); it != digits.end(); ++it) {
-                if(++*it == 10) {
+                if(*it == 9) {
                     *it = 0;
                     carry = 1;
                 }
                 else{
-                    *it += carry;
+                    ++*it; 
+                    carry = 0;
                     break;
                 }
             }
