@@ -1,3 +1,11 @@
+#codelite files and folders
+Debug/
+.codelite/
+*.mk
+*.workspace
+*.project
+Makefile
+
 # Prerequisites
 *.d
 
