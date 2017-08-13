@@ -22,6 +22,7 @@ void assert(type expected, type actual, string message = "") {
 void compareTest() {
     cout << "# compareTest" << endl;
    
+    /// operator> tests
    
     // both negative: same length
     assert(false, (bigint)"-12" > (bigint)"-11", "both negative, same lenghts, lhs smaller value");
@@ -53,8 +54,22 @@ void compareTest() {
 
 void increamentTest() {
     cout << "# incrementTest" << endl;
-    bigint input[] = {"-1", "-900", "-10", "-9"};
-    bigint expected[] = {"0", "-899", "-9", "-8"};
-    for(int i = 0; i < 4; ++i)
-        assert(expected[i], ++input[i]);
+    
+    /// # prefix increament tests
+    
+    // zero
+    assert(true, ++bigint("0") == bigint("1"), "increment zero");
+    assert(true, ++bigint("-1") == bigint("0"), "increment -1");
+    
+    // positive 
+    assert(true, ++bigint("12") == bigint("13"), "increment a positive integer");
+    assert(true, ++bigint("1239") == bigint("1240"), "increment positive bigint with 1 carry");
+    assert(true, ++bigint("12999") == bigint("13000"), "increment positive bigint with multiple carried.");
+    assert(true, ++bigint("999") == bigint("1000"), "increment positive int with carry overflow.");
+    
+    // negative
+    assert(true, ++bigint("-12") == bigint("-11"), "increment negative bigint");
+    assert(true, ++bigint("-120") == bigint("-119"), "increment negative with 1 carry");
+    assert(true, ++bigint("-1200") == bigint("-1199"), "increment negative with multiple carries");
+    assert(true, ++bigint("-1000") == bigint("-999"), "increment negative with reduces length.");
 }
