@@ -54,6 +54,7 @@ void compareTest() {
 }
 
 void increamentTest() {
+    
     cout << "# incrementTest" << endl;
     
     /// # prefix increament tests
@@ -73,4 +74,35 @@ void increamentTest() {
     assert(true, ++bigint("-120") == bigint("-119"), "increment negative with 1 carry");
     assert(true, ++bigint("-1200") == bigint("-1199"), "increment negative with multiple carries");
     assert(true, ++bigint("-1000") == bigint("-999"), "increment negative with reduces length.");
+}
+
+void additionTest(){
+    
+    cout << "# addition test" << endl;
+    
+    /// zero
+    
+    assert(bigint("1"), bigint("0") + bigint("1"), "zero and positive rhs");
+    assert(bigint("123"),  bigint("123") + bigint("0"), "zero and positive lhs");
+    assert(bigint("0"), bigint("0") + bigint("0"), "zero and zero");
+    assert(bigint("103"), bigint("103") + bigint("0"), "zero and a positive number including a 0 digit.");
+    assert(bigint("199"), bigint("199") + bigint("0"), "zero and a positive number including a 9 digit.");
+    
+    assert(bigint("-1"), bigint("0") + bigint("-1"), "zero and negative rhs");
+    assert(bigint("-123"),  bigint("-123") + bigint("0"), "zero and negative lhs");
+    assert(bigint("-103"), bigint("-103") + bigint("0"), "zero and a negative number including a 0 digit.");
+    assert(bigint("-199"), bigint("-199") + bigint("0"), "zero and a negative number including a 9 digit.");
+    
+    
+    /// both positive
+    
+    assert(bigint("12"), bigint("1") + bigint("11"), "both positive, different lenght rhs");
+    assert(bigint("123"), bigint("13") + bigint("10"), "both positive, different lenght rhs");
+    assert(bigint("222"), bigint("123") + bigint("99"), "both positive, different lenghs rhs, carry");
+    assert(bigint("1021"), bigint("922") + bigint("99"), "both positive different lenght rhs, carry overflow");
+    
+    assert(bigint("12"), bigint("11") + bigint("1"), "both positive, different lenght lhs");
+    assert(bigint("123"), bigint("10") + bigint("13"), "both positive, different lenght lhs");
+    assert(bigint("222"), bigint("99") + bigint("123"), "both positive, different lenghs lhs, carry");
+    assert(bigint("1021"), bigint("99") + bigint("922"), "both positive different lenght lhs, carry overflow");
 }
