@@ -122,11 +122,11 @@ void subtractionTest() {
     assert(bigint("199"), bigint("323") - bigint("124"), "both positive, same length, carry");
     assert(bigint("99"), bigint("223") - bigint("124"), "both positive, same length, carry overflow");
     assert(bigint("100"), bigint("123") - bigint("23"), "both positive, longer lhs");
-    assert(bigint("-100"), bigint("23") - bigint("123"), "both positive, shorter lhs");
     assert(bigint("893"), bigint("923") - bigint("30"), "both positive, longer lhs, carry");
+    assert(bigint("24"),  bigint("123") - bigint("99"), "both positive, longer lhs, carry overflow");
+    assert(bigint("-100"), bigint("23") - bigint("123"), "both positive, shorter lhs");
     assert(bigint("-893"), bigint("30") - bigint("923"), "both positive, shorter lhs, carry");
-    assert(bigint("24"),  bigint("123") - bigint("99")), "both positive, longer lhs, carry overflow");
-    assert(bigint("-24"),  bigint("99") - bigint("123")), "both positive, shorter lhs, carry overflow");
+    assert(bigint("-24"),  bigint("99") - bigint("123"), "both positive, shorter lhs, carry overflow");
     
     // TODO: one negative
     

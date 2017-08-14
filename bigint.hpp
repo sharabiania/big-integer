@@ -198,19 +198,58 @@ public:
 
     /* TODO: subtract two bigints */
     bigint operator-(const bigint& rhs){
+        
+        int c = compare(rhs);        
+
+        if(c == 0) return bigint("0");         
+   
+        list<sint>::const_iterator end1 = digits.end();
+        list<sint>::const_iterator end2 = rhs.digits.end();
         list<sint>::const_iterator it1 = digits.begin();
         list<sint>::const_iterator it2 = rhs.digits.begin();
         
         bigint temp;
-        while(it1 != digits.end()|| it2 != rhs.digits.end()){
+               
+        if(c < 0) 
+        {
+            temp.negative = true;
+            end1 = rhs.digits.end();
+            end2 = digits.end();
+            it1 = rhs.digits.begin();
+            it2 = digits.begin();
+        }
+               
+                
+        bool flag = false;
+        while(it1 != end1|| it2 != end2){
             sint a = 0, b = 0, carry = 0;
-            if(it1 != digits.end()) a = *(it1++);
-            if(it2 != rhs.digits.end()) b = *(it2++);
-            if(a < b) carry = 10;
-            if(carry != 0) --a;
+            if(it1 != end1) a = *it1;            
+            if(it2 != end2) b = *it2;
+            
+            if(flag) {
+                --a; 
+                flag = false;
+            }
+            
+            if(a < b) {
+                flag = true;
+                carry = 10;
+            }
             int sub = carry + a - b;
+            if(it1 != end1) ++it1;                    
+            if(it2 != end2) ++it2;
             temp.digits.push_back(sub);
         }
+        
+        
+        // remove the preceding zeros if any.
+        for(auto it = temp.digits.rbegin(); it != temp.digits.rend(); ++it){
+            if(*it == 0) 
+                temp.digits.pop_back();
+            else break;
+        }
+    
+        
         return temp;
     }
     

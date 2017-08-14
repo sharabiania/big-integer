@@ -6,7 +6,9 @@ int main() {
 
     compareTest();
     increamentTest();
-   
+    additionTest();   
+    subtractionTest(); 
+        
 	cin.get();
     return 0;
 }
