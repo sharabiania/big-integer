@@ -129,6 +129,15 @@ void subtractionTest() {
     assert(bigint("-24"),  bigint("99") - bigint("123"), "both positive, shorter lhs, carry overflow");
     
     // TODO: one negative
+    assert(bigint("357"), bigint("234") - bigint("-123"), "rhs negative, same length");
+    assert(bigint("-357"),bigint("-123") - bigint("234"), "lhs negative, same length");
+    assert(bigint("-310"), bigint("-123") - bigint("187"), "rhs negative, same length, carry");
+    assert(bigint("310"), bigint("123") - bigint("-187"), "lhs negative, same lenght, carry");
+    assert(bigint("-1110"), bigint("-123") - bigint("987"), "rhs negative, same length, carry overflow");
+    assert(bigint("1110"), bigint("123") - bigint("-987"), "lhs negative, same lenght, carry overflow");
+    assert(bigint("1010"), bigint("923") - bigint("-87"), "lhs negative, longer lhs, carry overflow");
+    assert(bigint("210"), bigint("23") - bigint("-187"), "lhs negative, longer lhs, carry");
     
     // TODO: both negative
+    assert(bigint("0"), bigint("-123") - bigint("-123"), "both negative, same length");
 }

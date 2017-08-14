@@ -109,6 +109,12 @@ public:
         if(compare(rhs) == 0) return false;
         else return true;
     }
+    
+    bigint& operator-(){
+        negative = true;
+        return *this;
+    }
+    
 	/* prefix increment */
 	bigint& operator++() {
         if(!negative) {
@@ -171,6 +177,32 @@ public:
     /* add two bigints */
     bigint operator+(const bigint& rhs){
         
+        if(negative && !rhs.negative) {
+            bigint a = *this;
+            a.negative = false;
+            bigint b = rhs;
+            bigint temp = b - a;
+            return temp;
+        }
+        
+        if(!negative && rhs.negative) {
+            bigint a = *this;            
+            bigint b = rhs;
+            b.negative = false;
+            bigint temp = a - b;
+            return temp;
+        }
+        
+        if(!negative && rhs.negative) {
+            bigint a = *this;
+            a.negative = false;
+            bigint b = rhs;
+            b.negative = false;
+            bigint temp = a + b;
+            temp.negative = true;
+            return temp;
+        }
+        
         list<sint>::const_iterator it1 = digits.begin();
         list<sint>::const_iterator it2 = rhs.digits.begin();
         bigint temp;
@@ -190,14 +222,42 @@ public:
             temp.digits.push_back(sum);
           
         }
-        if(carry == 1)
-            temp.digits.push_back(1);
+        if(carry > 0)
+            temp.digits.push_back(carry);
     
         return temp;
     }
 
     /* TODO: subtract two bigints */
     bigint operator-(const bigint& rhs){
+        
+        if(!negative && rhs.negative) {
+            bigint a = rhs;
+            a.negative = false;
+            bigint b = *this;
+            b.negative = false;
+            bigint temp = a + b;
+            return temp;
+        }
+        
+        if(negative && !rhs.negative) {
+            bigint a = rhs;
+            a.negative = false;
+            bigint b = *this;
+            b.negative = false;
+            bigint temp = a + b;
+            temp.negative = true;
+            return temp;
+        }
+        
+        if(negative && rhs.negative){
+            bigint a = *this;
+            a.negative = false;
+            bigint b = rhs;
+            b.negative = false;
+            bigint temp =  b - a;
+            return temp;
+        }
         
         int c = compare(rhs);        
 

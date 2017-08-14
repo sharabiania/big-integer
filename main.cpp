@@ -7,7 +7,7 @@ int main() {
     compareTest();
     increamentTest();
     additionTest();   
-    subtractionTest(); 
+    subtractionTest();     
         
 	cin.get();
     return 0;
