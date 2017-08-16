@@ -313,6 +313,43 @@ public:
         return temp;
     }
     
+    bigint operator*(const bigint& rhs){
+        if(compare(rhs) > 0){
+            bigint temp = rhs;
+            return  temp * *this; 
+        }
+        
+        auto it1 = digits.begin();
+        auto it2 = rhs.digits.begin();
+        bigint temp;
+        bigint sum;
+        uint carry = 0;
+        for(auto it2 = rhs.digits.begin(); it2 != rhs.digits.end(); ++it2){
+            uint a = *it2;
+            for(auto it1 = digits.begin(); it1 != digits.end(); ++it1) {
+                
+                uint b = *it1;
+                uint c = a * b;
+                if(c > 9) {
+                    carry = c - (c % 10);
+                    c %= 10;
+                }
+                temp.digits.push_back(c + carry);
+            
+            }
+            if(carry > 0)
+                temp.digits.push_back(carry);
+            sum = sum + temp;
+        }
+       
+            
+        if(!negative && !rhs.negative) sum.negative = false;
+        else if(!negative && rhs.negative) sum.negative = true;
+        else if(negative && !rhs.negative) sum.negative = true;
+        else if(negative && rhs.negative) sum.negative = false;
+        
+        return sum;
+    }
 
 	friend ostream& operator<<(ostream& os, const bigint& obj) {
         if(obj.negative) os << '-';
@@ -322,4 +359,3 @@ public:
 		return os;
 	}
 };
-

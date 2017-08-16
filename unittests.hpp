@@ -141,3 +141,7 @@ void subtractionTest() {
     // TODO: both negative
     assert(bigint("0"), bigint("-123") - bigint("-123"), "both negative, same length");
 }
+
+void multiplicationTest() {
+    //assert(bigint("5") * bigint("10"))
+}
