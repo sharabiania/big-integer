@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Session Name="/home/ali/Documents/dev/Projects/big-integer/BigInteger.workspace">
+  <int Value="0" Name="m_selectedTab"/>
+  <wxString Value="/home/ali/Documents/dev/Projects/big-integer/BigInteger.workspace" Name="m_workspaceName"/>
+  <TabInfoArray Name="TabInfoArray">
+    <TabInfo>
+      <wxString Value="/home/ali/Documents/dev/Projects/big-integer/main.cpp" Name="FileName"/>
+      <int Value="0" Name="FirstVisibleLine"/>
+      <int Value="9" Name="CurrentLine"/>
+      <wxArrayString Name="Bookmarks"/>
+      <IntVector Name="CollapsedFolds"/>
+    </TabInfo>
+    <TabInfo>
+      <wxString Value="/home/ali/Documents/dev/Projects/big-integer/unittests.hpp" Name="FileName"/>
+      <int Value="93" Name="FirstVisibleLine"/>
+      <int Value="141" Name="CurrentLine"/>
+      <wxArrayString Name="Bookmarks"/>
+      <IntVector Name="CollapsedFolds">
+        <IntVectorItem Value="21"/>
+        <IntVectorItem Value="55"/>
+      </IntVector>
+    </TabInfo>
+    <TabInfo>
+      <wxString Value="/home/ali/Documents/dev/Projects/big-integer/bigint.hpp" Name="FileName"/>
+      <int Value="200" Name="FirstVisibleLine"/>
+      <int Value="201" Name="CurrentLine"/>
+      <wxArrayString Name="Bookmarks"/>
+      <IntVector Name="CollapsedFolds">
+        <IntVectorItem Value="38"/>
+        <IntVectorItem Value="45"/>
+        <IntVectorItem Value="74"/>
+        <IntVectorItem Value="118"/>
+        <IntVectorItem Value="164"/>
+        <IntVectorItem Value="316"/>
+      </IntVector>
+    </TabInfo>
+    <TabInfo>
+      <wxString Value="/usr/include/c++/5/bits/stl_iterator.h" Name="FileName"/>
+      <int Value="298" Name="FirstVisibleLine"/>
+      <int Value="299" Name="CurrentLine"/>
+      <wxArrayString Name="Bookmarks"/>
+      <IntVector Name="CollapsedFolds"/>
+    </TabInfo>
+  </TabInfoArray>
+  <SerializedObject Name="m_breakpoints">
+    <long Value="2" Name="Count"/>
+    <SerializedObject Name="Breakpoint0">
+      <wxString Value="/home/ali/Documents/dev/Projects/big-integer/bigint.hpp" Name="file"/>
+      <int Value="114" Name="lineno"/>
+      <wxString Value="" Name="function_name"/>
+      <wxString Value="" Name="memory_address"/>
+      <int Value="1" Name="bp_type"/>
+      <int Value="0" Name="watchpoint_type"/>
+      <wxString Value="" Name="watchpt_data"/>
+      <CData Name="commandlist"/>
+      <bool Value="0" Name="regex"/>
+      <bool Value="0" Name="is_temp"/>
+      <bool Value="1" Name="is_enabled"/>
+      <int Value="0" Name="ignore_number"/>
+      <wxString Value="" Name="conditions"/>
+      <int Value="0" Name="origin"/>
+    </SerializedObject>
+    <SerializedObject Name="Breakpoint1">
+      <wxString Value="/home/ali/Documents/dev/Projects/big-integer/unittests.hpp" Name="file"/>
+      <int Value="10" Name="lineno"/>
+      <wxString Value="" Name="function_name"/>
+      <wxString Value="" Name="memory_address"/>
+      <int Value="1" Name="bp_type"/>
+      <int Value="0" Name="watchpoint_type"/>
+      <wxString Value="" Name="watchpt_data"/>
+      <CData Name="commandlist"/>
+      <bool Value="0" Name="regex"/>
+      <bool Value="0" Name="is_temp"/>
+      <bool Value="1" Name="is_enabled"/>
+      <int Value="0" Name="ignore_number"/>
+      <wxString Value="" Name="conditions"/>
+      <int Value="0" Name="origin"/>
+    </SerializedObject>
+  </SerializedObject>
+</Session>
