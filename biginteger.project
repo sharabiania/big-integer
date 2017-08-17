@@ -2,11 +2,6 @@
 <CodeLite_Project Name="biginteger" InternalType="Console">
   <Description/>
   <Dependencies/>
-  <VirtualDirectory Name="src">
-    <File Name="main.cpp"/>
-    <File Name="bigint.hpp"/>
-    <File Name="unittests.hpp"/>
-  </VirtualDirectory>
   <Settings Type="Executable">
     <GlobalSettings>
       <Compiler Options="-std=c++14" C_Options="" Assembler="">
@@ -95,4 +90,9 @@
       </Completion>
     </Configuration>
   </Settings>
+  <VirtualDirectory Name="src">
+    <File Name="src/unittests.hpp"/>
+    <File Name="src/bigint.hpp"/>
+    <File Name="src/main.cpp"/>
+  </VirtualDirectory>
 </CodeLite_Project>
