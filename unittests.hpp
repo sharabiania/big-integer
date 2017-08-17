@@ -146,6 +146,9 @@ void subtractionTest() {
 }
 
 void multiplicationTest() {
+    
+    cout << "# multiplication test" << endl;
+    
     std::vector<std::vector<std::string>> testingData = {
         {"5", "0", "0", "one zero, same length"},
         {"123", "0", "0", "one zero, different lengths"},
