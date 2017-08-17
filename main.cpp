@@ -4,17 +4,12 @@
 
 int main() {
 
-//    compareTest();
-//    increamentTest();
-//    additionTest();   
-//    subtractionTest();     
-
-
-    bigint a = "11";
-    bigint b = "2";
-    cout << a * b;    
-
-        
+    compareTest();
+    increamentTest();
+    additionTest();   
+    subtractionTest();   
+    multiplicationTest();  
+    
 	cin.get();
     return 0;
 }

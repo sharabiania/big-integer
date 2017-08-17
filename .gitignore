@@ -1,12 +1,12 @@
 #codelite files and folders
 [Dd]ebug/*
-.codelite/*
-*.mk
-*.workspace
-*.project
-BigInteger.txt
-compilation.db
-Makefile
+#.codelite/*
+#*.mk
+#*.workspace
+#*.project
+#BigInteger.txt
+#compilation.db
+#Makefile
 
 # Prerequisites
 *.d

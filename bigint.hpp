@@ -72,7 +72,7 @@ public:
 	}
 
 
-    int compare(const bigint& other){
+    int compare(const bigint& other) const{
         int check = 1;
         if(other.negative && !negative) return 1;
         if(!other.negative && negative) return -1;
@@ -100,7 +100,7 @@ public:
         else return false;
     }
     
-    bool operator==(const bigint& rhs){
+    bool operator==(const bigint& rhs) const{
         if(compare(rhs) == 0) return true;
         else return false;
     }
@@ -314,39 +314,46 @@ public:
     }
     
     bigint operator*(const bigint& rhs){
-        if(compare(rhs) > 0){
-            bigint temp = rhs;
-            return  temp * *this; 
-        }
-        
-        auto it1 = digits.begin();
-        auto it2 = rhs.digits.begin();
+
+        if(*this == "0" || rhs == "0")
+            return "0";
+       
         bigint temp;
         bigint sum;
-        uint carry = 0;
-        for(auto it2 = rhs.digits.begin(); it2 != rhs.digits.end(); ++it2){
-            uint a = *it2;
-            for(auto it1 = digits.begin(); it1 != digits.end(); ++it1) {
-                
-                uint b = *it1;
+        
+        int zeros = 0;
+        for(auto it1 = digits.begin(); it1 != digits.end(); ++it1){
+            uint carry = 0;
+            uint a = *it1;
+            temp.digits.clear();
+            for(auto it2 = rhs.digits.begin(); it2 != rhs.digits.end(); ++it2) {
+                uint b = *it2;
                 uint c = a * b;
-                if(c > 9) {
-                    carry = c - (c % 10);
-                    c %= 10;
-                }
-                temp.digits.push_back(c + carry);
-            
+                
+                c += carry;
+                carry = 0;
+                temp.digits.push_back((c % 10));
+              
+                if(c > 9) 
+                    carry = (c - (c % 10)) / 10;                                            
             }
-            if(carry > 0)
+            
+             if(carry > 0)
                 temp.digits.push_back(carry);
+                
+            for(int i = 0; i < zeros; ++i)
+                temp.digits.push_front(0);
+           
+            ++zeros;
             sum = sum + temp;
+           
         }
        
             
         if(!negative && !rhs.negative) sum.negative = false;
         else if(!negative && rhs.negative) sum.negative = true;
         else if(negative && !rhs.negative) sum.negative = true;
-        else if(negative && rhs.negative) sum.negative = false;
+        else sum.negative = false;
         
         return sum;
     }

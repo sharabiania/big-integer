@@ -1,17 +1,20 @@
 #include <iostream>
 #include <string>
+#include <vector>
 
  using std::cout;
  using std::endl;
  using std::string;
+ using std::vector;
 
 template <class type>
 void assert(type expected, type actual, string message = "") {
     if(expected != actual) {
-        if(message == "")
-            cout << " - failed" << endl;
-        else
-            cout << " - failed: " << message << endl;
+        cout << " - failed: ";
+        if(message != "")                
+            cout << message;
+            
+        cout << " - [expected: "<< expected << ", actual: " << actual << "]" << endl;
     }
     else {
         cout << " - passed" << endl;
@@ -143,5 +146,31 @@ void subtractionTest() {
 }
 
 void multiplicationTest() {
-    //assert(bigint("5") * bigint("10"))
+    std::vector<std::vector<std::string>> testingData = {
+        {"5", "0", "0", "one zero, same length"},
+        {"123", "0", "0", "one zero, different lengths"},
+        {"0", "0", "0", "both zeros, same length"},
+        {"1", "123", "123", "multiply by 1"},
+        {"12", "11", "132", "same length"},        
+        {"56", "24", "1344", "same length, carry overflow"},
+        {"123", "3", "369", "lhs longer"},
+        {"3", "123", "369", "rhs longer"},
+        {"456", "2", "912", "different length, carry"},
+        {"1234", "45", "55530", "different length, carry overflow"},
+        {"12345679", "72", "888888888", "lhs longer, carry overflow"},
+        {"9", "12345679", "111111111", "rhs longer, carry overflow"},
+        {"-21", "2", "-42", "lhs negative"},
+        {"22", "-3", "-66", "rhs negative"},
+        {"-32", "-20", "640", "both negative"}
+    };
+   
+   for(int i = 0; i < testingData.size(); ++i) {
+   
+        assert(
+        bigint(testingData[i][2].c_str()), 
+        bigint(testingData[i][0].c_str()) * bigint(testingData[i][1].c_str()),
+        testingData[i][3]);       
+   
+   }
+   
 }

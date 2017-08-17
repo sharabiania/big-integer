@@ -5,8 +5,8 @@
 ## Debug
 ProjectName            :=biginteger
 ConfigurationName      :=Debug
-WorkspacePath          := "/home/ali/Documents/dev/Sandbox/big-integer"
-ProjectPath            := "/home/ali/Documents/dev/Sandbox/big-integer"
+WorkspacePath          := "/home/ali/Documents/dev/Projects/big-integer"
+ProjectPath            := "/home/ali/Documents/dev/Projects/big-integer"
 IntermediateDirectory  :=./Debug
 OutDir                 := $(IntermediateDirectory)
 CurrentFileName        :=
@@ -92,7 +92,7 @@ PreBuild:
 ## Objects
 ##
 $(IntermediateDirectory)/main.cpp$(ObjectSuffix): main.cpp $(IntermediateDirectory)/main.cpp$(DependSuffix)
-	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/ali/Documents/dev/Sandbox/big-integer/main.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IncludePath)
+	$(CXX) $(IncludePCH) $(SourceSwitch) "/home/ali/Documents/dev/Projects/big-integer/main.cpp" $(CXXFLAGS) $(ObjectSwitch)$(IntermediateDirectory)/main.cpp$(ObjectSuffix) $(IncludePath)
 $(IntermediateDirectory)/main.cpp$(DependSuffix): main.cpp
 	@$(CXX) $(CXXFLAGS) $(IncludePCH) $(IncludePath) -MG -MP -MT$(IntermediateDirectory)/main.cpp$(ObjectSuffix) -MF$(IntermediateDirectory)/main.cpp$(DependSuffix) -MM "main.cpp"
 
