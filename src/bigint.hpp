@@ -105,6 +105,16 @@ public:
         else return false;
     }
 
+    bool operator>=(const bigint& rhs) const {
+        if(compare(rhs) >= 0) return true;
+        else return false;
+    }
+    
+    bool operator<=(const bigint& rhs) const {
+        if(compare(rhs) <= 0) return true;
+        else return false;
+    }
+
     bool operator!=(const bigint& rhs) {
         if(compare(rhs) == 0) return false;
         else return true;
@@ -228,7 +238,7 @@ public:
         return temp;
     }
 
-    /* TODO: subtract two bigints */
+    /* subtract two bigints */
     bigint operator-(const bigint& rhs){
         
         if(!negative && rhs.negative) {
@@ -313,6 +323,13 @@ public:
         return temp;
     }
     
+   
+    bigint& operator-=(const bigint& rhs) {
+        *this = *this - rhs;
+        return *this;
+    }
+   
+    /* multiply two bigints */
     bigint operator*(const bigint& rhs){
 
         if(*this == "0" || rhs == "0")
@@ -357,6 +374,23 @@ public:
         
         return sum;
     }
+
+    /* TODO: divide two bigints */
+    bigint operator/(const bigint& rhs){
+        
+        if(rhs == "0") throw;
+        
+        bigint N = *this; // numerator;
+        const bigint& D = rhs; // demoninator
+        bigint R = N; // remainder
+        bigint Q = "0"; // quotient
+        while(R >= D){
+            ++Q;
+            R -= D;
+        }
+        return Q;
+    }
+
 
 	friend ostream& operator<<(ostream& os, const bigint& obj) {
         if(obj.negative) os << '-';

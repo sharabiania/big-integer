@@ -177,3 +177,23 @@ void multiplicationTest() {
    }
    
 }
+
+void divisionTest() {
+    cout << "# division test" << endl;
+    
+    vector<vector<string>> testingData = {
+        {"0", "123", "0", "zero numerator"},
+       // TODO: {"123", "0", "zero denominator"},
+        {"123", "123", "1", "positive, division by iteself"},
+        {"22222", "2", "11111", "both positive, single digit rhs"}, 
+        {"1234", "23", "53", "both positive, different lenghts"},
+        {"6789", "1234", "5", "both positive, same length"}
+    };
+    
+    for(int i = 0; i < testingData.size(); ++i) {
+        assert(
+        bigint(testingData[i][2].c_str()),
+        bigint(testingData[i][0].c_str()) / bigint(testingData[i][1].c_str()),
+        testingData[i][3]);
+    }
+}
